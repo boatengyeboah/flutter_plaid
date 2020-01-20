@@ -68,11 +68,13 @@ class _WebViewPage {
 
   _processParams(Map<String, String> queryParams, String url) async {
     if (queryParams != null) {
-      final String eventName = queryParams['event_name'] ?? 'unknow';
+      final String eventName = queryParams['event_name'] ?? 'unknown';
       debugPrint('PLAID Event name:  $eventName');
 
+      final String exitStatus = queryParams['exit_status'] ?? 'unknown';
+
       if (eventName == 'EXIT' || (url?.contains('/exit?') ?? false)) {
-        if (exitStatus == "institution_not_found") {
+        if (exitStatus == 'institution_not_found') {
           this._config.onPlaidExit();
         }
         _closeWebView();
