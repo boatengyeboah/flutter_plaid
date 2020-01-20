@@ -198,6 +198,7 @@ class Configuration {
   String apiVersion;
   String isMobile;
   String isWebview;
+  Function onPlaidExit;
 }
 
 class Result {
@@ -219,5 +220,4 @@ class Result {
   String accountName;
   String institutionId;
   String institutionName;
-  Function onPlaidExit;
 }
