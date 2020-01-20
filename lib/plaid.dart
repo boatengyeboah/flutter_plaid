@@ -72,6 +72,9 @@ class _WebViewPage {
       debugPrint('PLAID Event name:  $eventName');
 
       if (eventName == 'EXIT' || (url?.contains('/exit?') ?? false)) {
+        if (exitStatus == "institution_not_found") {
+          this._config.onPlaidExit();
+        }
         _closeWebView();
       } else if (eventName == 'HANDOFF') {
         _closeWebView();
@@ -171,6 +174,7 @@ class Configuration {
     @required this.plaidClientId,
     @required this.secret,
     @required this.clientName,
+    @required this.onPlaidExit,
     this.webhook        = 'https://requestb.in',
     this.products       = 'auth',//e.g. auth or auth,income
     this.selectAccount  = 'true',//e.g. auth or auth,income
@@ -213,4 +217,5 @@ class Result {
   String accountName;
   String institutionId;
   String institutionName;
+  Function onPlaidExit;
 }
